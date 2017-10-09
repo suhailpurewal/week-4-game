@@ -1,0 +1,28 @@
+body {
+	background: url(../images/background.jpg) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	color: white;
+}
+.chars {
+	height: 125px;
+	width: 125px;
+	border-color: white;
+	border-style: solid;
+	border-width: 1px;
+	margin-top: 5px;
+	margin-left: 0px;
+}
+#yourcharacter {
+	
+}
+#spot1, #spot2, #spot3, #spot4 {
+	height: 175px;
+	width: 175px;
+	background-color: white;
+	margin-right: 10px;
+	color: black;
+	text-align: center;
+}
