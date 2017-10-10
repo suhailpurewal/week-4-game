@@ -6,7 +6,7 @@ body {
 	-o-background-size: cover;
 	color: white;
 }
-.chars {
+.chars, .images {
 	height: 125px;
 	width: 125px;
 	border-color: white;
@@ -18,10 +18,10 @@ body {
 #yourcharacter {
 	
 }
-#spot1, #spot2, #spot3, #spot4 {
+#Luke, #Kenobi, #Sidious, #Maul, .images {
 	height: 175px;
 	width: 175px;
-	background-color: white;
+	background-color: grey;
 	margin-right: 10px;
 	color: black;
 	text-align: center;

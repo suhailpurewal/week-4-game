@@ -1,7 +1,6 @@
 //creating var for characters
 console.log("you're good to go")
 $(".characters").addClass("playableCharacter");
-$(".yourHero").addClass("hidden")
 
 var characters = {
 	Luke: {
@@ -67,26 +66,26 @@ $(".characters").on("click", function(){
 	var placeholder = this.id;
 	userCharacter = characters[placeholder];
 	console.log(userCharacter)
-		$(this).addClass("hidden");
+		$(this).appendTo("yourHero")
+		$(this).removeClass("playableCharacter")
+		$(this).removeClass("characters")
 		$(this).addClass("yourHero")
+		
 		$(".characters").removeClass("playableCharacter")
 		$(".characters").addClass("enemyCharacter")
-		htmlBuild = "<img src='assets/images/" + placeholder + ".jpg'" + ">" 
-		$(".yourHero").html(htmlBuild);
+		$(".characters").appendTo("enemies")
 		$(".instructionalText").html("Now choose your opponent!");
 	}
-		else if (defenderName === undefined && userCharacter !== undefined){
+	// 	else if (defenderName === undefined && userCharacter !== undefined){
 		
-		var placeholder = this.id;
-		defenderName = characters[placeholder];
-		console.log(defenderName); 
-		$(this).addClass("hideMe");
-		$(this).removeClass("enemyCharacter"); 
-		$(this).addClass("currentEnemy");
-		htmlBuild = "<img src='assets/images/" + placeholder + ".jpg'" + ">" 
-		$(".enemies").html(htmlBuild); 
-		$(".instructionalText").html("Let the battle begin!");
-	}
+	// 	var placeholder = this.id;
+	// 	defenderName = characters[placeholder];
+	// 	console.log(defenderName); 
+	// 	$(this).addClass("hideMe");
+	// 	$(this).removeClass("enemyCharacter"); 
+	// 	$(this).addClass("currentEnemy");
+	// 	$(".instructionalText").html("Let the battle begin!");
+	// }
 
 
 });
