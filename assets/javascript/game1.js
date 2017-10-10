@@ -49,23 +49,29 @@ var htmlBuild;
 // doc ready handler
 $(document).ready(function(){
 
-
+//select your hero
 $(".character").on("click", function() {
+		$(".character").off();
 		var placeholder = this.id;
-		var playerSelected = false;
 		userCharacter = characters[placeholder];
 		console.log(userCharacter);
 		$(this).addClass(".pickedName");
 		$(this).removeClass("playableCharacter");
 		$(this).removeClass("character");
 		$(this).appendTo("#yourHero");
-		$(".character").off();
 		$(".character").appendTo("#enemies");
 		$(".character").addClass(".enemies");
 		$(".character").removeClass("character");
+		return;
 					
 	})
 });
+//select person you will attack
+// $("#enemies").on("click", function() {
+// 		var placeholder = this.id;
+					
+// 	})
+// });
 
 
 
