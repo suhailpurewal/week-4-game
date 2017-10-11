@@ -6,12 +6,21 @@ body {
 	-o-background-size: cover;
 	color: white;
 }
-.chars, .images {
+
+.chars {	
+	height: 125px;
+	width: 125px;
+	margin-top: 5px;
+	margin-left: 0px;
+
+}
+
+.images {
 	height: 125px;
 	width: 125px;
 	border-color: white;
 	border-style: solid;
-	border-width: 1px;
+	border-width: 2px;
 	margin-top: 5px;
 	margin-left: 0px;
 }
@@ -26,6 +35,19 @@ body {
 	color: black;
 	text-align: center;
 }
+
+.enemies {
+	border-color: orange;
+}
+.pickedName {
+	border-color: green;
+}
+.defender {
+	border-color: red;
+}
+
+
+
 .hidden {
 	visibility: hidden;
 }
