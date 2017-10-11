@@ -26,3 +26,6 @@ body {
 	color: black;
 	text-align: center;
 }
+.hidden {
+	visibility: hidden;
+}

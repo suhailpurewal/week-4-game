@@ -6,15 +6,15 @@ $(".characters").addClass("enemies");
 
 // var for characters & stats
 var characters = {
-	Luke: {
-		name: "Luke",
+	Luke : {
+		name: "Luke Skywalker",
 		image: "skywalker.jpg",
 		health: 100,
 		attack: 10,
 		counter: 15,
 		jQueryElement: $("#Luke")
 	},
-	Kenobi: {
+	Kenobi : {
 		name: "Obi-Wan Kenobi",
 		image: "obiwan.jpg",
 		health: 120,
@@ -22,7 +22,7 @@ var characters = {
 		counter: 20,
 		jQueryElement: $("#Kenobi")
 	},
- 	Sidious: {
+ 	Sidious : {
 		name: "Darth Sidious",
 		image: "sidious.jpg",
 		health: 150,
@@ -30,7 +30,7 @@ var characters = {
 		counter: 25,
 		jQueryElement: $("#Sidious")
 	},
- 	Maul: {
+ 	Maul : {
 		name: "Darth Maul",
 		image: "maul.jpg",
 		health: 180,
@@ -88,15 +88,50 @@ $("body").on("click", ".enemies", function() {
 }
 
 
-// reset classes & locations so you can play again.
+// reset classes, locations & values so you can play again.
 function reset() {
 		$(".pickedName").addClass("character");		
 		$(".character").addClass("playableCharacter");
 		$(".character").removeClass("pickedName");
 		$(".character").removeClass("enemies");
 		$(".character").removeClass("defender");
-		$("character").removeClass("dead");
+		$("character").removeClass("defeated");
+		$(".character").removeClass("hidden");
 		$(".character").appendTo("#playableCharacters");
+characters = {
+	Luke: {
+		name: "Luke Skywalker",
+		image: "skywalker.jpg",
+		health: 100,
+		attack: 10,
+		counter: 15,
+		jQueryElement: $("#Luke")
+	},
+	Kenobi: {
+		name: "Obi-Wan Kenobi",
+		image: "obiwan.jpg",
+		health: 120,
+		attack: 15,
+		counter: 20,
+		jQueryElement: $("#Kenobi")
+	},
+ 	Sidious: {
+		name: "Darth Sidious",
+		image: "sidious.jpg",
+		health: 150,
+		attack: 20,
+		counter: 25,
+		jQueryElement: $("#Sidious")
+	},
+ 	Maul: {
+		name: "Darth Maul",
+		image: "maul.jpg",
+		health: 180,
+		attack: 25,
+		counter: 30,
+		jQueryElement: $("#Maul")
+	},
+}
 		console.log("you clicked reset");
 		selectchar();
 		selectdefender();
@@ -106,12 +141,15 @@ $(".reset-button").on("click", function() {
 	reset();
 })
 
-$("#health1").text("Health: " + characters.health)
-$("#health2")
-$("#health3")
-$("#health4")
+function updatehealth() {
+$("#health1").text("Health: " + characters.Luke.health);
+$("#health2").text("Health: " + characters.Kenobi.health);
+$("#health3").text("Health: " + characters.Sidious.health);
+$("#health4").text("Health: " + characters.Maul.health);
+};
 
 // attack functions
+updatehealth();
 selectchar();
 selectdefender();
 //attack button
@@ -119,19 +157,29 @@ $(".attack-button").on("click", function() {
 	console.log("you clicked attack!")
 	if (defender.health > 1) {
 	defender.health-=pickedName.attack;
+	pickedName.health-=defender.counter;
+	updatehealth();
 		console.log(defender.health);
+		console.log(pickedName.health);
 	} else {
-		alert("You beat " + defender.name)
-		$(".defender").appendTo("#dead")
-		$(".defender").removeClass("defender")
-		$(".defender").addClass("defeated")
+		alert("You beat " + defender.name);
+		$(".defender").addClass("defeated");
+		$(".defender").addClass("hidden");		
+		$(".defender").appendTo("#dead");
+		$(".defender").removeClass("defender");
+		updatehealth();
 		selectdefender();
 	}
+	if (pickedName.health < 1) {
+		alert("You Lose!");
+		reset();
+	}
+
 });
 })
 
-// currently having issues pulling health from the var characters
-// also having issues pushing health values to the html page
+// how to get health to not reach 0? characters.health <= 0?
+// how to push win message after all 3 are beaten?
 // was having issues with this , fixed with .off
 // also having issues with syntax for the math
 
