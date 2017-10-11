@@ -50,29 +50,57 @@ var htmlBuild;
 $(document).ready(function(){
 
 //select your hero
-$(".character").on("click", function() {
-		$(".character").off();
+function selectchar() {
+$(".playableCharacter").on("click", function() {
+		$(".playableCharacter").off();
 		var placeholder = this.id;
 		userCharacter = characters[placeholder];
 		console.log(userCharacter);
-		$(this).addClass(".pickedName");
+		$(this).addClass("pickedName");
 		$(this).removeClass("playableCharacter");
 		$(this).removeClass("character");
 		$(this).appendTo("#yourHero");
 		$(".character").appendTo("#enemies");
-		$(".character").addClass(".enemies");
-		$(".character").removeClass("character");
-		return;
+		$(".character").addClass("enemies");
+		$(".character").removeClass("playableCharacter")
 					
 	})
+}
+selectchar();
+
+// select person you will attack
+function selectdefender() {
+$(".character").on("click", function() {
+		var placeholder = this.id;
+		console.log(placeholder);
+		defender = characters[placeholder];
+		console.log(defender);
+		$(this).addClass("defender");
+		$(this).removeClass("enemies");
+		$(".defender").appendTo("#defender");			
+	})
+}
+selectdefender();
+
+function reset() {
+		$(".pickedName").addClass("character");		
+		$(".character").addClass("playableCharacter");
+		$(".character").removeClass("pickedName");
+		$(".character").removeClass("enemies");
+		$(".character").removeClass("defender");
+		$(".character").appendTo("#playableCharacters");
+		console.log("you clicked reset");
+		selectchar();
+	};
+
+$(".reset-button").on("click", function() {
+	reset();
+})
+
+
+
+
+
 });
-//select person you will attack
-// $("#enemies").on("click", function() {
-// 		var placeholder = this.id;
-					
-// 	})
-// });
-
-
 
 
