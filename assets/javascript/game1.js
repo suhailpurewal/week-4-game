@@ -1,7 +1,10 @@
 //creating var for characters
 console.log("you're good to go")
+//adding another class to help pull up chars later
 $(".characters").addClass("playableCharacter");
+$(".characters").addClass("enemies");
 
+// var for characters & stats
 var characters = {
 	Luke: {
 		name: "Luke",
@@ -39,8 +42,8 @@ var characters = {
 // various other var's i think i'll need
 var enemies = {};
 var defender = {};
-var userCharacter = {};
-var pickedName = {};
+var userCharacter;
+var pickedName;
 var defenderName;
 var state = "clear"
 var htmlBuild; 
@@ -49,13 +52,14 @@ var htmlBuild;
 // doc ready handler
 $(document).ready(function(){
 
-//select your hero
+//select your hero - waits for click and then removes/adds some classes and moves objects to the new divs
 function selectchar() {
-$(".playableCharacter").on("click", function() {
+$("body").on("click", ".playableCharacter", function() {
 		$(".playableCharacter").off();
 		var placeholder = this.id;
-		userCharacter = characters[placeholder];
-		console.log(userCharacter);
+		pickedName = characters[placeholder];
+		console.log("Select Char function working");
+		console.log(pickedName);
 		$(this).addClass("pickedName");
 		$(this).removeClass("playableCharacter");
 		$(this).removeClass("character");
@@ -65,14 +69,16 @@ $(".playableCharacter").on("click", function() {
 		$(".character").removeClass("playableCharacter")
 					
 	})
-}
-selectchar();
+};
 
-// select person you will attack
+
+
+// select person you will attack - having issues - 'this' seems to be connected to the top function
 function selectdefender() {
-$(".character").on("click", function() {
+$("body").on("click", ".enemies", function() {
+		$("body").off();
 		var placeholder = this.id;
-		console.log(placeholder);
+		console.log("defender function working");
 		defender = characters[placeholder];
 		console.log(defender);
 		$(this).addClass("defender");
@@ -80,27 +86,60 @@ $(".character").on("click", function() {
 		$(".defender").appendTo("#defender");			
 	})
 }
-selectdefender();
 
+
+// reset classes & locations so you can play again.
 function reset() {
 		$(".pickedName").addClass("character");		
 		$(".character").addClass("playableCharacter");
 		$(".character").removeClass("pickedName");
 		$(".character").removeClass("enemies");
 		$(".character").removeClass("defender");
+		$("character").removeClass("dead");
 		$(".character").appendTo("#playableCharacters");
 		console.log("you clicked reset");
 		selectchar();
+		selectdefender();
 	};
-
+// calling reset on clicking reset button
 $(".reset-button").on("click", function() {
 	reset();
 })
 
+$("#health1").text("Health: " + characters.health)
+$("#health2")
+$("#health3")
+$("#health4")
 
-
-
-
+// attack functions
+selectchar();
+selectdefender();
+//attack button
+$(".attack-button").on("click", function() {
+	console.log("you clicked attack!")
+	if (defender.health > 1) {
+	defender.health-=pickedName.attack;
+		console.log(defender.health);
+	} else {
+		alert("You beat " + defender.name)
+		$(".defender").appendTo("#dead")
+		$(".defender").removeClass("defender")
+		$(".defender").addClass("defeated")
+		selectdefender();
+	}
 });
+})
+
+// currently having issues pulling health from the var characters
+// also having issues pushing health values to the html page
+// was having issues with this , fixed with .off
+// also having issues with syntax for the math
+
+
+
+
+
+
+
 
 
