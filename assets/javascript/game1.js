@@ -221,7 +221,7 @@ $(".attack-button").on("click", function() {
 		$(".pickedName").addClass("hidden");
 		$(".enemies").addClass("hidden");
 		$(".attack-button").addClass("hidden");
-		$(".instructions").empty();
+		$(".instructions").html("");
 		$(".stats").empty();
 	}
 
@@ -235,7 +235,7 @@ function wincheck(){
 		$(".character").addClass("hidden");
 		$(".pickedName").addClass("hidden");
 		$(".attack-button").addClass("hidden");
-		$(".instructions").empty();
+		$(".instructions").html("");
 		$(".stats").empty();
 
 		
