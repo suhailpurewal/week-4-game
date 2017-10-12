@@ -122,6 +122,8 @@ function reset() {
 		$(".character").appendTo("#playableCharacters");
 		$(".attack-button").removeClass("hidden");
 		$("#roundEndPic img:last-child").remove()
+		$("#attackStats").html("");
+		$("#defendStats").html("");
 
 
 		defender = undefined;
@@ -198,6 +200,8 @@ $(".attack-button").on("click", function() {
 	defender.health-=pickedName.attack;
 	pickedName.health-=defender.counter;
 	pickedName.attack += attackPower;
+	$("#attackStats").html(pickedName.name + " attacked " + defender.name + " for " + pickedName.attack + " damage!");
+	$("#defendStats").html(defender.name + " attacked you back for "  + defender.counter + " damage!");
 	updatehealth();
 		// console.log(defender.health);
 		console.log(pickedName.attack);
@@ -216,7 +220,6 @@ $(".attack-button").on("click", function() {
 		wincheck();
 	}
 	if (pickedName.health < 1) {
-		alert("You Lose!");
 		$("#roundEndPic").html("<img src='https://media.giphy.com/media/xT9DPJVjlYHwWsZRxm/giphy.gif'>");
 		$(".character").addClass("hidden");
 		$(".pickedName").addClass("hidden");
@@ -224,6 +227,8 @@ $(".attack-button").on("click", function() {
 		$(".attack-button").addClass("hidden");
 		$(".instructions").html("");
 		$(".stats").empty();
+		$("#attackStats").html("You Lose!");
+		$("#defendStats").html("");
 	}
 
 });
@@ -231,13 +236,14 @@ $(".attack-button").on("click", function() {
 // check if you won
 function wincheck(){
 	if(defeatedArray.length === 3){
-		alert("Congrats You Win!");
 		$("#roundEndPic").html("<img src='https://media.giphy.com/media/UOx8muoc7ptXq/giphy.gif'>")
 		$(".character").addClass("hidden");
 		$(".pickedName").addClass("hidden");
 		$(".attack-button").addClass("hidden");
 		$(".instructions").html("");
 		$(".stats").empty();
+		$("#attackStats").html("Congrats! You Win!!!");
+		$("#defendStats").html("");
 
 		
 	}
