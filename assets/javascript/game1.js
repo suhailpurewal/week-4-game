@@ -189,6 +189,7 @@ selectchar();
 selectdefender();
 hoverstats();
 instructions();
+wincheck();
 
 //attack button - updates health on html - adds classes to hide & moves defeated opponents. - also prompts if you lose
 $(".attack-button").on("click", function() {
@@ -208,11 +209,11 @@ $(".attack-button").on("click", function() {
 		$(".defender").appendTo("#dead");
 		$(".defender").removeClass("defender");
 		defender = undefined;
-		wincheck();
 		updatehealth();
 		selectdefender();
 		hoverstats();
 		instructions();
+		wincheck();
 	}
 	if (pickedName.health < 1) {
 		alert("You Lose!");
