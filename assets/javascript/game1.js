@@ -4,6 +4,7 @@ console.log("you're good to go")
 $(".characters").addClass("playableCharacter");
 $(".characters").addClass("enemies");
 
+
 // var for characters & stats
 var characters = {
 	Luke : {
@@ -43,8 +44,10 @@ var characters = {
 var enemies = {};
 var defender;
 var userCharacter;
-var pickedName;
-var defenderName;
+var defeatedArray = [];
+var pickedName = undefined;
+var defenderName = undefined;
+var isCharPicked = false;
 var attackPower = 0;
 
 // doc ready handler
@@ -66,7 +69,9 @@ $("body").on("click", ".playableCharacter", function() {
 		$(".character").appendTo("#enemies");
 		$(".character").addClass("enemies");
 		$(".character").removeClass("playableCharacter")
+		isCharPicked = true;
 		hoverstats();
+		instructions();
 					
 	})
 };
@@ -84,21 +89,44 @@ $("body").on("click", ".enemies", function() {
 		$(this).addClass("defender");
 		$(this).removeClass("enemies");
 		$(".defender").appendTo("#defender");
-		hoverstats();			
+		hoverstats();	
+		instructions();
 	})
-}
+};
+
+//pushes instructions to the page
+function instructions(){
+		if(pickedName===undefined){
+			$(".instructions").html("<p>Choose your Character!</p>");
+		} else if (pickedName!==undefined && defender===undefined){
+			$(".instructions").html("<p>Choose who you will attack!</p>");
+			console.log("ITS WORKING")
+		} else {
+			$(".instructions").html("<p>Fight!</p>");
+		}
+	};
 
 
 // reset classes, locations & values so you can play again.
 function reset() {
-		$(".pickedName").addClass("character");		
+		$(".pickedName").addClass("character");
+		$(".character").addClass("enemies");
+		$(".enemies").addClass("character");	
 		$(".character").addClass("playableCharacter");
 		$(".character").removeClass("defeated");
 		$(".character").removeClass("pickedName");
 		$(".character").removeClass("enemies");
 		$(".character").removeClass("defender");
 		$(".character").removeClass("hidden");
+		$(".enemies").removeClass("hidden");
 		$(".character").appendTo("#playableCharacters");
+		$(".attack-button").removeClass("hidden");
+		$("#roundEndPic img:last-child").remove()
+
+
+		defender = undefined;
+		pickedName = undefined;
+
 characters = {
 	Luke: {
 		name: "Luke Skywalker",
@@ -133,12 +161,14 @@ characters = {
 		jQueryElement: $("#Maul")
 	},
 }
+
 		attackPower = 0;
 		console.log("you clicked reset");
 		selectchar();
 		selectdefender();
 		updatehealth();
 		hoverstats();
+		instructions();
 	};
 // calling reset on clicking reset button
 $(".reset-button").on("click", function() {
@@ -158,6 +188,7 @@ updatehealth();
 selectchar();
 selectdefender();
 hoverstats();
+instructions();
 
 //attack button - updates health on html - adds classes to hide & moves defeated opponents. - also prompts if you lose
 $(".attack-button").on("click", function() {
@@ -171,47 +202,64 @@ $(".attack-button").on("click", function() {
 		console.log(pickedName.attack);
 	} else {
 		alert("You beat " + defender.name);
+		defeatedArray.push(defender.name);
 		$(".defender").addClass("defeated");
 		$(".defender").addClass("hidden");		
 		$(".defender").appendTo("#dead");
 		$(".defender").removeClass("defender");
+		defender = undefined;
+		wincheck();
 		updatehealth();
 		selectdefender();
 		hoverstats();
+		instructions();
 	}
-	if (pickedName.health <= 1) {
+	if (pickedName.health < 1) {
 		alert("You Lose!");
-		reset();
+		$("#roundEndPic").html("<img src='https://media.giphy.com/media/xT9DPJVjlYHwWsZRxm/giphy.gif'>");
+		$(".character").addClass("hidden");
+		$(".pickedName").addClass("hidden");
+		$(".enemies").addClass("hidden");
+		$(".attack-button").addClass("hidden");
+		$(".instructions").empty();
+		$(".stats").empty();
 	}
 
 });
+
+// check if you won
+function wincheck(){
+	if(defeatedArray.length === 3){
+		alert("Congrats You Win!");
+		$("#roundEndPic").html("<img src='https://media.giphy.com/media/UOx8muoc7ptXq/giphy.gif'>")
+		$(".character").addClass("hidden");
+		$(".pickedName").addClass("hidden");
+		$(".attack-button").addClass("hidden");
+		$(".instructions").empty();
+		$(".stats").empty();
+
+		
+	}
+};
 
 //shows character stats when you hover over - it should then tell you who to pick, and that the game is ready, but that's not working yet.
 function hoverstats(){
 $(".playableCharacter").hover(function(){
 		var placeholder = this.id;
 		var stats = characters[placeholder];
-		$(".instructions").html("<p>" +  stats.name + " has : " + stats.health + " Health Points, " + stats.attack + " Attack Power and " + stats.counter + " Counter-Attack. </p>");
+		$(".stats").html("<p>" +  stats.name + " starts with : " + stats.health + " Health Points, " + stats.attack + " Attack Power and " + stats.counter + " Counter-Attack. </p>");
 	}, 
-		function(){
-		if(pickedName===undefined){
-			$(".instructions").html("<p>Choose your Character!</p>");
-		} else if (pickedName!==undefined && defender===undefined){
-			$(".instructions").html("<p>Choose your Adversary wisely!</p>");
-			console.log("ITS WORKING")
-		} else {
-			$(".instructions").html("<p>Let the battle begin!</p>");
-		}
-	}
 );
+
 };
 })
 
 // how to get health to not reach 0? characters.health <= 0?
+// maybe set defender initilize to false then change to true when selected
 // how to prevent buttons from being pushed when not in correct state
-// how to push win message after all 3 are beaten?
-// hoverstats only working through the first if.
+// how to push win message after all 3 are beaten? - getting undefined error after 1st playthrough - on pickedname.Health
 // was having issues with this , fixed with .off
+// window.onload is jquery version of 
 
 
 
