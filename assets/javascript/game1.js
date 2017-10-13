@@ -183,6 +183,7 @@ $("#health1").text("Health: " + characters.Luke.health);
 $("#health2").text("Health: " + characters.Kenobi.health);
 $("#health3").text("Health: " + characters.Sidious.health);
 $("#health4").text("Health: " + characters.Maul.health);
+// try to fix negative numbers in this function
 };
 
 // function calls
@@ -199,8 +200,8 @@ $(".attack-button").on("click", function() {
 	if (defender.health >= 1) {
 	defender.health-=pickedName.attack;
 	pickedName.health-=defender.counter;
-	pickedName.attack += attackPower;
 	$("#attackStats").html(pickedName.name + " attacked " + defender.name + " for " + pickedName.attack + " damage!");
+	pickedName.attack += attackPower;
 	$("#defendStats").html(defender.name + " attacked you back for "  + defender.counter + " damage!");
 	updatehealth();
 		// console.log(defender.health);
@@ -263,9 +264,7 @@ $(".playableCharacter").hover(function(){
 
 // how to get health to not reach 0? characters.health <= 0?
 // maybe set defender initilize to false then change to true when selected
-// how to prevent buttons from being pushed when not in correct state
-// how to push win message after all 3 are beaten? - getting undefined error after 1st playthrough - on pickedname.Health
-// was having issues with this , fixed with .off
+// how to prevent buttons from being pushed when not in correct state - hidden class until you can attack - 
 // window.onload is jquery version of 
 
 
