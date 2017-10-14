@@ -64,11 +64,40 @@ body {
 }
 .red {
 	color: red;
-	font-size: 23px;
+	font-size: 25px;
 	font-style: bold;
 }
 .green {
 	color: green;
-	font-size: 23px;
+	font-size: 25px;
 	font-style: bold;
+}
+/*.instructions{
+	border-style: solid;
+	border-width: 2px;
+	border-color: #ffd700;
+}*/
+#header {
+	font-family: 'Raleway', sans-serif;
+	color: #ffd700;
+	font-weight: bold;
+	font-size: 50px;
+
+}
+#newright {
+	margin-left:-175px;
+}
+#newmid {
+	padding-left:120px;
+	}
+.bottombox {
+	border-style: solid;
+	border-width: 2px;
+	border-color: #ffd700;
+}
+.winloss {
+	font-size: 6em;
+}
+#attackStats, #defendStats {
+	font-size: 1em;
 }

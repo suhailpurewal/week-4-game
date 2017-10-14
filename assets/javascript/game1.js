@@ -65,8 +65,8 @@ $("body").on("click", ".playableCharacter", function() {
 		$(this).addClass("pickedName");
 		$(this).removeClass("playableCharacter");
 		$(this).removeClass("character");
-		$(this).appendTo("#yourHero");
-		$(".character").appendTo("#enemies");
+		$(this).appendTo("#newleft");
+		$(".character").appendTo("#newmid");
 		$(".character").addClass("enemies");
 		$(".character").removeClass("playableCharacter")
 		isCharPicked = true;
@@ -88,7 +88,9 @@ $("body").on("click", ".enemies", function() {
 		console.log(defender);
 		$(this).addClass("defender");
 		$(this).removeClass("enemies");
-		$(".defender").appendTo("#defender");
+		$(".defender").appendTo("#newright");
+		$(".attack-button").removeClass("hidden");
+		$(".reset-button").removeClass("hidden");
 		hoverstats();	
 		instructions();
 	})
@@ -125,10 +127,13 @@ function reset() {
 		$("#attackStats").html("");
 		$("#defendStats").html("");
 		$(".winloss").html("");
+		$(".instructions").removeClass("hidden");
+		$(".bottombox").removeClass("hidden");
 
 
 		defender = undefined;
 		pickedName = undefined;
+		defeatedArray = [];
 
 characters = {
 	Luke: {
@@ -214,6 +219,7 @@ $(".attack-button").on("click", function() {
 		$(".defender").addClass("hidden");		
 		$(".defender").appendTo("#dead");
 		$(".defender").removeClass("defender");
+		$(".attack-button").addClass("hidden")
 		$("#attackStats").html("");
 		$("#defendStats").html("");
 		defender = undefined;
@@ -229,8 +235,10 @@ $(".attack-button").on("click", function() {
 		$(".pickedName").addClass("hidden");
 		$(".enemies").addClass("hidden");
 		$(".attack-button").addClass("hidden");
-		$(".instructions").html("");
+		$(".instructions").addClass("hidden");
+		$(".bottombox").addClass("hidden");
 		$(".stats").empty();
+		$(".winloss").removeClass("hidden");
 		$(".winloss").html("You Lose!");
 		$("#defendStats").html("");
 		$("#attackStats").html("");
@@ -247,6 +255,9 @@ function wincheck(){
 		$(".attack-button").addClass("hidden");
 		$(".instructions").html("");
 		$(".stats").empty();
+		$(".instructions").addClass("hidden");
+		$(".bottombox").addClass("hidden");
+		$(".winloss").removeClass("hidden");
 		$(".winloss").html("Congrats! You Win!!!");
 		$("#defendStats").html("");
 		$("#attackStats").html("");
