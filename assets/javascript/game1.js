@@ -124,6 +124,7 @@ function reset() {
 		$("#roundEndPic img:last-child").remove()
 		$("#attackStats").html("");
 		$("#defendStats").html("");
+		$(".winloss").html("");
 
 
 		defender = undefined;
@@ -200,9 +201,9 @@ $(".attack-button").on("click", function() {
 	if (defender.health >= 1) {
 	defender.health-=pickedName.attack;
 	pickedName.health-=defender.counter;
-	$("#attackStats").html(pickedName.name + " attacked " + defender.name + " for " + pickedName.attack + " damage!");
+	$("#attackStats").html(pickedName.name + " attacked " + defender.name + " for " +"<span class='green'>" + pickedName.attack +"</span" + " damage!");
 	pickedName.attack += attackPower;
-	$("#defendStats").html(defender.name + " attacked you back for "  + defender.counter + " damage!");
+	$("#defendStats").html(defender.name + " attacked you back for " +"<span class='red'>" + defender.counter +"</span>" + " damage!");
 	updatehealth();
 		// console.log(defender.health);
 		console.log(pickedName.attack);
@@ -213,6 +214,8 @@ $(".attack-button").on("click", function() {
 		$(".defender").addClass("hidden");		
 		$(".defender").appendTo("#dead");
 		$(".defender").removeClass("defender");
+		$("#attackStats").html("");
+		$("#defendStats").html("");
 		defender = undefined;
 		updatehealth();
 		selectdefender();
@@ -228,8 +231,9 @@ $(".attack-button").on("click", function() {
 		$(".attack-button").addClass("hidden");
 		$(".instructions").html("");
 		$(".stats").empty();
-		$("#attackStats").html("You Lose!");
+		$(".winloss").html("You Lose!");
 		$("#defendStats").html("");
+		$("#attackStats").html("");
 	}
 
 });
@@ -243,8 +247,9 @@ function wincheck(){
 		$(".attack-button").addClass("hidden");
 		$(".instructions").html("");
 		$(".stats").empty();
-		$("#attackStats").html("Congrats! You Win!!!");
+		$(".winloss").html("Congrats! You Win!!!");
 		$("#defendStats").html("");
+		$("#attackStats").html("");
 
 		
 	}
